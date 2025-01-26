@@ -58,43 +58,44 @@
     </div>
 
     <!-- Related Articles -->
-<div class="mt-10">
-    <h3 class="text-xl font-bold mb-4">Related Articles</h3>
-    <div class="grid gap-8 lg:grid-cols-3 ">
-        @forelse ($relatedPosts as $related)
-        <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    @forelse ($relatedPosts as $related)
+        <div class="group rounded-lg p-6 transition-all hover:shadow-lg">
             @if ($related->thumbnail)
-                  <img src="{{ asset('storage/' . $related->thumbnail) }}" alt="{{ $related->title }}" class="w-full h-48 object-cover mt-2 rounded">
+                <a href="{{ route('blog.show', $post->slug) }}" class="block aspect-video overflow-hidden rounded-lg mb-4">
+                    <img 
+                        src="{{ asset('storage/' . $related->thumbnail) }}" 
+                        alt="{{ $post->title }}" 
+                        class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    >
+                </a>
             @endif
-            <div class="flex justify-between items-center mt-4 mb-4 text-gray-500">
-                  <a href="{{ route('blog.category', $related->category->slug) }}">
-                    <span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-                        <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
-                        {{ $related->category->name }}
+            
+            <div class="space-y-3">
+                <h3 class="font-medium">
+                    <a href="{{ route('blog.show', $related->slug) }}" 
+                        class="hover:text-blue-600 transition-colors">
+                        {{Str::limit (strip_tags($related->title),50) }}
+                    </a>
+                </h3>
+                
+                <p class="text-sm text-gray-600 line-clamp-3">
+                    {{ Str::limit(strip_tags($related->content), 100) }}
+                </p>
+                
+                <div class="flex items-center justify-between pt-4">
+                    <span class="text-xs text-gray-500">
+                        {{ $post->created_at->format('M d, Y') }}
                     </span>
-                  </a>
-                    <span class="text-sm">{{ $related->created_at ? $related->created_at->diffForHumans() : 'Unknown' }}</span>
+                    <a href="{{ route('blog.show', $related->slug) }}" 
+                        class="text-sm font-medium text-blue-600 hover:text-blue-700">
+                        Read more →
+                    </a>
                 </div>
-          <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><a href="{{ route('blog.show', $related->slug) }}">{{Str::limit (strip_tags($related->title),50) }}</a></h2>
-          <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{ Str::limit(strip_tags($related->content), 100) }}</p>
-          <div class="flex justify-between items-center">
-              <div class="flex justify-between items-center mt-auto">
-                  <span class="font-medium dark:text-white capitalize">
-                    {{ $related->user->name ?? 'Anonymous' }}
-                  </span>
-              </div>
-              <a href="{{ route('blog.show', $related->slug) }}" class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                  Read more
-                  <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-              </a>
-          </div>
-      </article>
-        @empty
-            <p>No related articles found.</p>
-        @endforelse
-    </div>
+            </div>
+        </div>
+    @endforeach
 </div>
-
-
     
 @endsection

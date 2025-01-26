@@ -1,0 +1,28 @@
+.hover-effect {
+      display: flex;
+      align-items: center;
+      position: relative;
+      transition: color 0.3s ease;
+  }
+  
+  .hover-effect::before {
+      content: "";
+      width: 3px;
+      height: 100%;
+      background-color: #e53e3e; /* Warna merah */
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+      transform-origin: top;
+  }
+  
+  .hover-effect:hover::before {
+      transform: scaleY(1);
+  }
+  
+  .hover-effect:hover h4 {
+      color: #e53e3e; /* Warna merah */
+  }
+  

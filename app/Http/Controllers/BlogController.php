@@ -9,15 +9,32 @@ class BlogController extends Controller
 {
     public function index()
     {
+        // Ambil postingan yang di-publish
         $posts = BlogPost::with('category', 'user')
             ->published() // Hanya tampilkan artikel dengan status 'published'
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
+        // Ambil postingan terbaru (misalnya 5 postingan terakhir)
+        $latestPost = BlogPost::with('category', 'user')
+            ->published() // Hanya artikel yang dipublikasikan
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        // Ambil 5 postingan dengan views terbanyak
+        $popularPosts = BlogPost::with('category', 'user')
+        ->published() // Hanya artikel yang dipublikasikan
+        ->orderBy('views', 'desc') // Urutkan berdasarkan views
+        ->limit(5)
+        ->get();
+
+        // Ambil semua kategori
         $categories = Category::all();
 
-        return view('blog.index', compact('posts', 'categories'));
+        return view('blog.index', compact('posts', 'latestPost',  'popularPosts', 'categories'));
+        
     }
+
 
     public function categoryIndex()
     {

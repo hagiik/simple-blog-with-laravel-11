@@ -3,48 +3,94 @@
 @section('title', 'Home')
 
 @section('content')
-    <div class="grid grid-cols-2 gap-6">
-        
-
-        <!-- Main Content -->
-        <div class="col-span-3">
-            <h2 class="text-xl font-bold mb-4">Recent Posts</h2>
-            <div class="grid gap-8 lg:grid-cols-2">
-            @foreach ($posts as $post)
-                  <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        @if ($post->thumbnail)
-                            <a href="{{ route('blog.show', $post->slug) }}">
-                                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}" class="w-full h-48 object-cover mt-2 rounded">
-                            </a>
-                        @endif
-                        <div class="flex justify-between items-center mt-4 mb-4 text-gray-500">
-                              <a href="{{ route('blog.category', $post->category->slug) }}">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-                                    <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
-                                    {{ $post->category->name }}
-                                </span>
-                              </a>
-                                <span class="text-sm">{{ $post->created_at ? $post->created_at->diffForHumans() : 'Unknown' }}</span>
-                            </div>
-                      <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h2>
-                      <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{ Str::limit(strip_tags($post->content), 150) }}</p>
-                      <div class="flex justify-between items-center">
-                          <div class="flex justify-between items-center mt-auto">
-                              <span class="font-medium dark:text-white capitalize">
-                                {{ $post->user->name ?? 'Anonymous' }}
-                              </span>
-                          </div>
-                          <a href="{{ route('blog.show', $post->slug) }}" class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                              Read more
-                              <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                          </a>
-                      </div>
-                  </article>
-            @endforeach
+    <!-- Featured Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        @if ($latestPost)
+            <div class="rounded-lg p-8 shadow-md">
+                <img src="{{ asset('storage/' . $latestPost->thumbnail) }}" alt="Illustration" class="mb-4">
+                <a href="{{ route('blog.show', $latestPost->slug) }} class="text-2xl font-bold mb-2">
+                    {{ $latestPost->title }}
+                </a>
             </div>
-            <div class="mt-6">
-                {{ $posts->links() }}
+        @else
+            <p>Tidak ada postingan terbaru.</p>
+        @endif
+    
+        
+        <div class="space-y-6">
+            <div class="flex items-center mb-4">
+                <span class="text-yellow-400 mr-2">★</span>
+                <h3 class="text-lg font-medium">Popular Posts</h3>
+            </div>
+            <div class="space-y-4">
+                @foreach ($popularPosts as $popularPost)
+                    <a href="{{ route('blog.show', $popularPost->slug) }}" class="block hover-effect p-2 rounded">
+                        <h4 class="font-medium text-gray-500">{{ $popularPost->title }}</h4>
+                    </a>
+                @endforeach
             </div>
         </div>
+        
     </div>
+
+    <!-- Tabs -->
+    <div class="border-b mb-8">
+        {{-- <nav class="flex space-x-8">
+            <a href="#" class="border-b-2 border-black pb-2 font-medium">Most Popular</a>
+            <a href="#" class="text-gray-500 hover:text-gray-900 pb-2">Enterprise</a>
+            <a href="#" class="text-gray-500 hover:text-gray-900 pb-2">Product</a>
+            <a href="#" class="text-gray-500 hover:text-gray-900 pb-2">Sales</a>
+            <a href="#" class="text-gray-500 hover:text-gray-900 pb-2">Customer Service</a>
+            <a href="#" class="text-gray-500 hover:text-gray-900 pb-2">Talent</a>
+        </nav> --}}
+    </div>
+
+    <!-- Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    @foreach ($posts as $post)
+        <div class="group rounded-lg p-6 transition-all hover:shadow-lg flex flex-col h-full">
+            @if ($post->thumbnail)
+                <a href="{{ route('blog.show', $post->slug) }}" class="block aspect-video overflow-hidden rounded-lg mb-4">
+                    <img 
+                        src="{{ asset('storage/' . $post->thumbnail) }}" 
+                        alt="{{ $post->title }}" 
+                        class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    >
+                </a>
+            @endif
+            
+            <div class="flex flex-col flex-grow">
+                <h3 class="font-medium mb-3">
+                    <a href="{{ route('blog.show', $post->slug) }}" 
+                        class="hover:text-red-600 transition-colors">
+                        {{ $post->title }}
+                    </a>
+                </h3>
+                
+                <p class="text-sm text-gray-600 line-clamp-3 mb-4">
+                    {{ Str::limit(strip_tags($post->content), 100) }}
+                </p>
+                
+                <div class="flex justify-between items-center mt-auto pt-4 ">
+                    <span class="text-xs text-gray-500">
+                        {{ $post->created_at->format('M d, Y') }}
+                    </span>
+                    <a href="{{ route('blog.show', $post->slug) }}" 
+                        class="text-sm font-medium text-red-600 hover:text-red-700">
+                        Read more
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
+@if ($posts->isEmpty())
+    <div class="text-center py-12">
+        <p class="text-lg text-gray-500 dark:text-gray-400">
+            No published articles available or all articles are still in draft status.
+        </p>
+    </div>
+@endif
+    
 @endsection

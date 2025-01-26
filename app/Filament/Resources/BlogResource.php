@@ -69,7 +69,7 @@ class BlogResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')->searchable(),
+                Tables\Columns\TextColumn::make('title')->limit(20)->searchable(),
                 Tables\Columns\TextColumn::make('category.name')->label('Category'),
                 Tables\Columns\TextColumn::make('user.name')->label('Author'),
                 Tables\Columns\ImageColumn::make('thumbnail')->label('Thumbnail'),

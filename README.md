@@ -24,7 +24,7 @@ This is a Laravel web application with Tailwind CSS, Vite, and Font Awesome inte
 
 Before running the application, make sure you have the following installed:
 
-- [PHP 8.0+](https://www.php.net/)
+- [PHP 8.2+](https://www.php.net/)
 - [Composer](https://getcomposer.org/)
 - [Node.js](https://nodejs.org/)
 - [NPM](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)

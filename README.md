@@ -10,90 +10,164 @@
 
 ![Flowbite Logo](https://flowbite.s3.amazonaws.com/brand/logo-light/type/flowbite-logo.png)
 
+# Description
 
+This is a Laravel web application with Tailwind CSS, Vite, and Font Awesome integration. The application includes basic layout structure with a responsive navbar, main content area, and footer. It also includes meta tags for SEO optimization and Open Graph support for better sharing experiences on social media.
 
-## Deskripsi
-Blog Application adalah platform blogging modern yang memungkinkan pengguna untuk membuat dan mengelola artikel dengan mudah. Aplikasi ini dibangun menggunakan **Laravel 11** sebagai framework utama, **Filament** untuk dashboard pengelolaan, **TailwindCSS** untuk styling responsif, dan **Flowbite** untuk komponen UI. Aplikasi ini juga dilengkapi dengan fitur **Auto Meta** untuk mendukung kebutuhan SEO secara otomatis.
+## Features
+- **Responsive Layout**: The application uses Tailwind CSS for responsive design.
+- **SEO Optimized**: Meta tags for SEO, Open Graph, and Twitter Cards.
+- **Social Media Links**: Integration with popular social media platforms like Facebook, Twitter, GitHub, and Dribbble.
+- **Vite Integration**: Optimized asset bundling with Vite for faster development and production builds.
 
-## Fitur Utama
+## Prerequisites
 
-### 1. Manajemen Blog
-- Membuat, mengedit, dan menghapus artikel.
-- Mendukung pengelompokan artikel berdasarkan kategori.
-- Penambahan gambar pada artikel.
+Before running the application, make sure you have the following installed:
 
-### 2. Optimisasi SEO Otomatis
-- Auto Meta Title, Description, dan Keywords untuk setiap artikel.
-- Struktur data yang ramah mesin pencari.
+- [PHP 8.0+](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/)
+- [NPM](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+- [Laravel 11](https://laravel.com/)
 
-### 3. Dashboard Admin
-- Menggunakan **Filament** untuk antarmuka dashboard yang modern dan mudah digunakan.
-- Statistik artikel dan pengguna.
+## Installation
 
-### 4. Desain Responsif
-- Memanfaatkan **TailwindCSS** dan **Flowbite** untuk tampilan yang responsif dan interaktif di berbagai perangkat.
+### 1. Clone the Repository
 
-## Instalasi
+Clone the repository to your local machine:
 
-Ikuti langkah-langkah berikut untuk menginstal aplikasi ini di lingkungan lokal Anda:
-
-### Prasyarat
-- PHP >= 8.2
-- Composer
-- Node.js & npm
-- Database (MySQL/PostgreSQL/SQLite)
-
-### Langkah Instalasi
-1. Clone repositori ini:
-   ```bash
-   https://github.com/hagiik/simple-blog-with-laravel-11.git
-   cd simple-blog-with-laravel-11
-   ```
-
-2. Install dependensi:
-   ```bash
-   composer install
-   npm install && npm run build
-   ```
-
-3. Salin file `.env` dan sesuaikan konfigurasi:
-   ```bash
-   cp .env.example .env
-   ```
-
-4. Generate application key:
-   ```bash
-   php artisan key:generate
-   ```
-
-5. Migrasikan database:
-   ```bash
-   php artisan migrate
-   ```
-
-6. Jalankan server lokal:
-   ```bash
-   php artisan serve
-   ```
-
-## Penggunaan
-Akses aplikasi di browser Anda melalui URL berikut:
-```
-http://127.0.0.1:8000
+```bash
+git clone https://github.com/hagiik/simple-blog-with-laravel-11.git
+cd simple-blog-with-laravel-11
 ```
 
-## Teknologi yang Digunakan
-- **Laravel 11** - Framework PHP untuk pengembangan aplikasi backend.
-- **Filament** - CMS modern untuk pengelolaan data.
-- **TailwindCSS** - Framework CSS untuk styling yang fleksibel.
-- **Flowbite** - Komponen UI siap pakai yang terintegrasi dengan TailwindCSS.
+### 2. Install PHP Dependencies
 
-## Kontribusi
-Kontribusi sangat diterima! Silakan buat pull request untuk perbaikan atau penambahan fitur baru.
+Run the following command to install the PHP dependencies:
 
-## Lisensi
-Aplikasi ini dilisensikan di bawah [MIT License](LICENSE).
+```bash
+composer install
+```
 
----
+### 3. Install JavaScript Dependencies
 
-Dibuat dengan ❤️ menggunakan **Laravel**, **Filament**, **TailwindCSS**, dan **Flowbite**.
+Run the following command to install the JavaScript dependencies:
+
+```bash
+npm install
+```
+
+or if you're using Yarn:
+
+```bash
+yarn install
+```
+
+### 4. Environment Setup
+
+Make sure to set up your `.env` file. You can copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+Then, generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+### 5. Database Setup
+
+Make sure your database is set up and configured in your `.env` file. Then, run the migrations:
+
+```bash
+php artisan migrate
+```
+
+### 6. Build the Assets
+
+To compile your assets with Vite, run the following command:
+
+```bash
+npm run dev
+```
+
+For production, use:
+
+```bash
+npm run build
+```
+
+### 7. Serve the Application
+
+Start the development server with:
+
+```bash
+php artisan serve
+```
+
+The application will be available at `http://localhost:8000`.
+
+## Folder Structure
+
+```
+/app                    # Application logic
+   /Filament            # Filament Dashboard Admin
+/resources              # Views, CSS, and assets
+    /views              # Blade templates
+    /css                # CSS files
+    /js                 # JavaScript files
+/routes                 # Application routes
+/public                 # Public assets (served to the browser)
+```
+
+## Configuration
+
+The main configuration files can be found in:
+
+- `.env`: Environment-specific settings.
+- `config/app.php`: Application-wide settings.
+
+## Built With
+
+- [Laravel 11](https://laravel.com/) - PHP Framework
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [Font Awesome](https://fontawesome.com/) - Icon library
+
+## Contributing
+
+If you'd like to contribute to the project, feel free to fork the repository and submit a pull request with your improvements or bug fixes.
+
+### Steps to contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature-name`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to your branch (`git push origin feature/your-feature-name`).
+5. Create a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- [Laravel](https://laravel.com/) for providing a powerful and elegant framework.
+- [Tailwind CSS](https://tailwindcss.com/) for making it easy to build responsive UIs.
+- [Vite](https://vitejs.dev/) for blazing-fast front-end tooling.
+```
+
+### Penjelasan:
+- **Installation**: Langkah-langkah detail untuk mengkloning, menginstal dependensi, dan menyiapkan lingkungan.
+- **Environment Setup**: Mengatur file `.env` dan menjalankan perintah untuk menghasilkan kunci aplikasi.
+- **Database Setup**: Instruksi untuk menyiapkan database dan menjalankan migrasi.
+- **Build the Assets**: Kompilasi aset dengan Vite untuk pengembangan dan produksi.
+- **Serve the Application**: Menjalankan server pengembangan Laravel.
+- **Folder Structure**: Penjelasan tentang struktur folder dalam proyek.
+- **Configuration**: Informasi tentang file konfigurasi yang digunakan.
+- **Contributing**: Instruksi bagi siapa saja yang ingin berkontribusi ke proyek.
+- **License**: Menyebutkan lisensi proyek.
+- **Acknowledgements**: Pemberian penghargaan kepada teknologi yang digunakan.
+
+Cukup salin kode di atas dan tempelkan ke file `README.md` Anda. Dengan ini, pengembang lain yang bergabung dengan proyek ini atau pengguna yang mengunduhnya akan tahu bagaimana cara menjalankan dan berkontribusi pada aplikasi Anda.
